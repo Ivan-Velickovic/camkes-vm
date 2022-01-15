@@ -19,7 +19,7 @@ void WEAK init_ram_module(vm_t *vm, void *cookie)
 {
     int err;
 
-    if (config_set(CONFIG_PLAT_EXYNOS5) || config_set(CONFIG_PLAT_QEMU_ARM_VIRT) || config_set(CONFIG_PLAT_TX2)) {
+    if (config_set(CONFIG_PLAT_EXYNOS5) || config_set(CONFIG_PLAT_QEMU_ARM_VIRT) || config_set(CONFIG_PLAT_TX2) || config_set(CONFIG_PLAT_IMX8MM_EVK) {
         err = vm_ram_register_at(vm, linux_ram_base, linux_ram_size, true);
     } else {
         err = vm_ram_register_at(vm, linux_ram_base, linux_ram_size, false);
