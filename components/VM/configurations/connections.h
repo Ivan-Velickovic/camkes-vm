@@ -148,12 +148,17 @@
     to_end##_topology = [topology(__CONFIG_EXPAND_TOPOLOGY)];
 
 #define __INIT_ADD_INTERFACE_END(base_id, target_id) \
-    {"init":"make_virtio_net_vswitch_driver_dummy", "badge":"ether_" # target_id "_send_notification_badge()", "irq":"virtio_net_notify_vswitch"}, \
-    {"init":"make_virtio_net_vswitch_driver_dummy", "badge":"ether_" # target_id "_recv_notification_badge()", "irq":"virtio_net_notify_vswitch"},
+    // {"init":"make_virtio_net_vswitch_driver_dummy", "badge":"ether_" # target_id "_send_notification_badge()", "irq":"virtio_net_notify_vswitch"}, \
+    // {"init":"make_virtio_net_vswitch_driver_dummy", "badge":"ether_" # target_id "_recv_notification_badge()", "irq":"virtio_net_notify_vswitch"},
 
 #define __CONNECTION_PERVM_ADD_INIT(base_id, vm_ids...) \
     __CALL_SINGLE(__INIT_ADD_INTERFACE_END, base_id, vm_ids)
 
 #define VM_CONNECTION_INIT_HANDLER(vm_id, topology) \
     VM##vm_id##_##topology(__CONNECTION_PERVM_ADD_INIT) \
-    {"init":"make_virtio_net_vswitch"}
+    {"init":"make_virtio_vsock"}
+
+// /* Defines a virtIO vsock connection. */
+// #define VM_VSOCK_INIT(vm_id, topology) \
+//     VM##vm_id##_##topology(__CONNECTION_PERVM_ADD_INIT) \
+//     {"init":"make_virtio_vsock"}
